@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizarea/TextContainer.dart';
-
+import 'package:quizarea/ImageContainer.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -37,8 +37,15 @@ class MyHomePage extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(colors:[Colors.black,Colors.white] )
         ),
-      child: Center(child:TextContainer("working",Color.fromARGB(255, 255, 225, 0),30)),
-      ),
+      child: Center(child:Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+          children: [ImageContainer("assets/images/quiz-logo.png"),
+          SizedBox(height: 50,),
+          TextContainer("working",Color.fromARGB(255, 255, 225, 0),30),
+
+          ]),
+      )
+      )
       );
     }
   }
