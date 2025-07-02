@@ -13,12 +13,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      // theme: Color.fromARGB(255, 0, 2, 255)
-        // ThemeData(
-      //   colorScheme: ColorScheme.fromSeed(
-      //       seedColor: Color.fromARGB(255, 172, 8, 177)
-      //   ),
-      // ),
       home: MyHomePage(),
     );
   }
@@ -35,13 +29,30 @@ class MyHomePage extends StatelessWidget {
       body: Container(
         // alignment: Alignment.center,
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors:[Colors.black,Colors.white] )
+          gradient: LinearGradient(colors:
+          [
+            Color.fromARGB(255, 36, 7, 156),
+            Color.fromARGB(255, 8, 0, 255)
+            ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight )
         ),
       child: Center(child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
           children: [ImageContainer("assets/images/quiz-logo.png"),
-          SizedBox(height: 50,),
-          TextContainer("working",Color.fromARGB(255, 255, 225, 0),30),
+          const SizedBox(height: 50,),
+          TextContainer("Are you ready ?",Color.fromARGB(255, 255, 225, 0),30),
+            const SizedBox(height: 25),
+
+            OutlinedButton(
+              onPressed: () {},
+              style: OutlinedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: TextContainer("Start Quiz", Colors.black, 30),
+            )
 
           ]),
       )
