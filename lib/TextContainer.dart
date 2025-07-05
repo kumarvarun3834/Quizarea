@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class TextContainer extends StatelessWidget {
-  const TextContainer(this.text,this.colour,this.fsize, {super.key});
+  const TextContainer(this.text,this.colour,this.f, {super.key});
   final String text;
   final Color colour;
-  final double fsize;
+  final double f;
   @override
   Widget build(context) {
     return  Text(text,
       style: TextStyle(
           color: colour,
-          fontSize: fsize
+          fontSize: f
       ),
     );
   }}
