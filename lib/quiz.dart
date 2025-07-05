@@ -26,14 +26,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _Quiz extends State<MyHomePage>{
-  Widget currState=Main_Screen();
   void switchState(){
     setState(() {
-      currState=const Quesation_Screen();
+      currState=Quesations();
     });
   }
+  Widget currState=Main_Screen(onPressed: switchState);
+
   @override
-  Widget build( context) {
+  Widget build(context) {
     return Scaffold(
       // body: Center(child:TextContainer("working",Color.fromARGB(255, 255, 225, 0),30)),
         body: Container(

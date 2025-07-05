@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:quizarea/TextContainer.dart';
 import 'package:quizarea/ImageContainer.dart';
 
-class Quesation_Screen extends StatefulWidget{
-  const Quesation_Screen({super.key});
-  @override
-  State<StatefulWidget> createState() {
-    return _Ques_screen();
-  }
-}
+class  Quesations extends StatelessWidget {
+  // final VoidCallback onPressed;
+  const Quesations({super.key});
+  // Widget next;
 
-class _Ques_screen extends State<Quesation_Screen>{
   @override
-  Widget build(context) {
+  Widget build(BuildContext context) {
+    // return Center(child: TextContainer("works", Colors.black, 50));
     return Center(child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
         //   mainAxisSize: MainAxisSize.min,
@@ -24,8 +21,8 @@ class _Ques_screen extends State<Quesation_Screen>{
           const SizedBox(height: 25),
 
           OutlinedButton.icon(
-            onPressed: () {
-              Quesation_Screen();
+            onPressed: (){
+              print("button woking");
             },
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.black,
@@ -35,8 +32,8 @@ class _Ques_screen extends State<Quesation_Screen>{
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            icon: Icon(Icons.keyboard_arrow_left),
-            label: TextContainer("Start Quiz", Colors.black, 30),
+            // icon: Icon(Icons.arrow_right_alt),
+            label: TextContainer("started already", Colors.black, 30),
           )
 
         ]),
