@@ -24,8 +24,6 @@ class  Main_Screen extends StatelessWidget {
             onPressed: onPressed,
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.black,
-              // elevation: 100,
-              // side: BorderSide(width: 3),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -38,8 +36,3 @@ class  Main_Screen extends StatelessWidget {
     );
   }
 }
-
-// class _QuizScreen extends State<Main_Screen> {
-//   _QuizScreen(this.next);
-//
-// }
