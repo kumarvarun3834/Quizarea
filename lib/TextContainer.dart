@@ -11,6 +11,6 @@ class TextContainer extends StatelessWidget {
       style: TextStyle(
           color: colour,
           fontSize: f
-      ),
+      )
     );
   }}
