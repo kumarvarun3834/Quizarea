@@ -35,7 +35,8 @@ class _Quiz extends State<MyHomePage> {
 
   void switchState() {
     setState(() {
-      currState = Quesations();
+      currState = Quesations(["Q","O1","O2","O3","O4","A"]);
+      // currState = Quesations();
     });
   }
 

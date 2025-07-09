@@ -10,7 +10,8 @@ class TextContainer extends StatelessWidget {
     return  Text(text,
       style: TextStyle(
           color: colour,
-          fontSize: f
+          fontSize: f,
+        letterSpacing: 3,
       )
     );
   }}
