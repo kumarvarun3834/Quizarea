@@ -15,10 +15,10 @@ class  Quesations extends StatelessWidget {
           Center(child:
           TextContainer(dataset[0], Color.fromARGB(255, 255, 225, 0), 30)),
           const SizedBox(height: 20),
-          buttons_opt(dataset[1]),
-          buttons_opt(dataset[2]),
-          buttons_opt(dataset[3]),
-          buttons_opt(dataset[4]),
+          buttons_opt(dataset[0],dataset[1],dataset[5]),
+          buttons_opt(dataset[0],dataset[2],dataset[5]),
+          buttons_opt(dataset[0],dataset[3],dataset[5]),
+          buttons_opt(dataset[0],dataset[4],dataset[5]),
         ]
     );
   }

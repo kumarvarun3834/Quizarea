@@ -3,14 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:quizarea/TextContainer.dart';
 
 class buttons_opt extends StatelessWidget {
-  buttons_opt(this.opt,{super.key});
+  buttons_opt(this.Q,this.opt,this.A,{super.key});
+  final String Q,A;
   final String opt;
+
   @override
   Widget build(BuildContext context) {
     return OutlinedButton.icon(
       onPressed: () {
+        if (opt == A){
+          print(Q);
+          print("correct");
+        }
+        else{
+        print(Q);
         print(opt);
-      },
+      }},
       style: OutlinedButton.styleFrom(
         fixedSize: Size(300, 30),
         backgroundColor: Colors.black12,
@@ -19,7 +27,6 @@ class buttons_opt extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
         ),
       ),
-// icon: Icon(Icons.arrow_right_alt),
       label: TextContainer(opt, Colors.white, 20)
     );
   }
