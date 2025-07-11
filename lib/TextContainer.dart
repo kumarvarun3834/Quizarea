@@ -11,7 +11,7 @@ class TextContainer extends StatelessWidget {
       style: TextStyle(
           color: colour,
           fontSize: f,
-        letterSpacing: 3,
+        // letterSpacing: 3,
       )
     );
   }}
