@@ -13,7 +13,7 @@ class  Quesations extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(child:
-          TextContainer(dataset[0], Color.fromARGB(255, 255, 225, 0), 30)),
+          TextContainer(dataset[0], Color.fromARGB(255, 0, 255, 255), 30)),
           const SizedBox(height: 20),
           buttons_opt(dataset[0],dataset[1],dataset[5]),
           buttons_opt(dataset[0],dataset[2],dataset[5]),

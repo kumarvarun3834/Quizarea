@@ -21,13 +21,13 @@ class buttons_opt extends StatelessWidget {
       }},
       style: OutlinedButton.styleFrom(
         fixedSize: Size(300, 30),
-        backgroundColor: Colors.black12,
-        foregroundColor: Colors.white,
+        backgroundColor: Colors.white10,
+        foregroundColor: Colors.black,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50),
         ),
       ),
-      label: TextContainer(opt, Colors.white, 20)
+      label: TextContainer(opt, Colors.black, 20)
     );
   }
 }
