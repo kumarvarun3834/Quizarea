@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizarea/start_screen.dart';
 import 'package:quizarea/quesations.dart';
+import 'package:quizarea/result_screen.dart';
 
 class My_App extends StatelessWidget {
   const My_App({super.key});
@@ -35,6 +36,7 @@ class _Quiz extends State<MyHomePage> {
 
     quizData = quizdatareset();
     quizResult = quizReset();
+    quizData.shuffle();
     currState = Main_Screen(onPressed: switchState);
   }
 
@@ -102,8 +104,6 @@ class _Quiz extends State<MyHomePage> {
     return quizResult;
   }
 
-
-
   int i=0;
   void switchState() {
     setState(() {
@@ -112,8 +112,6 @@ class _Quiz extends State<MyHomePage> {
           if (quizResult[i][1] == quizResult[i][3]) {
             quizResult[i][2] = "true";
             i += 1;
-            print("correct choice");
-
             quizResult[i][0] = quizData[i][0];
             quizResult[i][1] = quizData[i][1];
             quizResult[i][3] = " ";
@@ -121,21 +119,18 @@ class _Quiz extends State<MyHomePage> {
             currState = Quesations(quizData[i], switchState, quizResult[i]);
 
           } else {
-            print("working here");
             quizResult[i][4] += "1";
             quizData[i].remove(quizResult[i][3]);
             currState = Quesations(quizData[i], switchState, quizResult[i]);
           }
           }else {
-          print("Q printed");
           currState = Quesations(quizData[i], switchState, quizResult[i]);
           quizResult[i][0] = quizData[i][0];
           quizResult[i][1] = quizData[i][1];
           quizResult[i][3] = " ";
         }
       }else if(i == quizData.length ){
-        print(quizResult);
-        currState = Main_Screen(onPressed: switchState);
+        currState = ResultScreen(quizResult);
         i+=1;
       }else{
         i=0;
