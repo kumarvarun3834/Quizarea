@@ -183,7 +183,14 @@ class _Quiz extends State<MyHomePage> {
           quizResult[i][1] = quizData[i][1];
           quizResult[i][3] = " ";
         }
+      }else if(i == quizData.length ){
+        print(quizResult);
+        currState = Main_Screen(onPressed: switchState);
+        i+=1;
       }else{
+        i=0;
+        quizData = quizdatareset();
+        quizResult = quizReset();
         currState = Main_Screen(onPressed: switchState);
       }
     });
