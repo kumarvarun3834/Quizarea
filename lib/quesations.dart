@@ -7,7 +7,7 @@ class  Quesations extends StatelessWidget {
   // final VoidCallback onPressed2;
   Quesations(this.$dataset,this.onPressed,this.$quizResult,{super.key});
   final List<String> $dataset;
-  List<List<String>> $quizResult;
+  List<String> $quizResult;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,10 +21,10 @@ class  Quesations extends StatelessWidget {
           const SizedBox(height: 20),
           Container(
             child: Column(children: [
-              if ($dataset.length>=3)  buttons_opt($dataset[0],$dataset[2],$dataset[1],onPressed),
-              if ($dataset.length>=4)  buttons_opt($dataset[0],$dataset[3],$dataset[1],onPressed),
-              if ($dataset.length>=5)  buttons_opt($dataset[0],$dataset[4],$dataset[1],onPressed),
-              if ($dataset.length>=6)  buttons_opt($dataset[0],$dataset[5],$dataset[1],onPressed),
+              if ($dataset.length>=3)  buttons_opt($dataset[0],$dataset[2],$dataset[1],onPressed,$quizResult),
+              if ($dataset.length>=4)  buttons_opt($dataset[0],$dataset[3],$dataset[1],onPressed,$quizResult),
+              if ($dataset.length>=5)  buttons_opt($dataset[0],$dataset[4],$dataset[1],onPressed,$quizResult),
+              if ($dataset.length>=6)  buttons_opt($dataset[0],$dataset[5],$dataset[1],onPressed,$quizResult),
           ]
             )
           )

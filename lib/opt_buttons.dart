@@ -4,26 +4,21 @@ import 'package:quizarea/TextContainer.dart';
 
 class buttons_opt extends StatelessWidget {
   final VoidCallback onPressed;
-  buttons_opt(this.Q,this.opt,this.A,this.onPressed,{super.key});
+  buttons_opt(this.Q,this.opt,this.A,this.onPressed,this.$quizResult,{super.key});
   final String Q,A;
   final String opt;
+  List<String> $quizResult;
 
   @override
   Widget build(BuildContext context) {
     return Container(
         width: 350,
         child: OutlinedButton.icon(
-      // onPressed: () {
-      //   if (opt == A){
-      //     print(Q);
-      //     print("correct");
-      //
-      //   }
-      //   else{
-      //   print(Q);
-      //   print(opt);
-      // }},
-      onPressed: onPressed,
+      onPressed: (){
+        $quizResult[3] = opt;
+        print($quizResult);
+        onPressed;
+        },
       style: OutlinedButton.styleFrom(
         // fixedSize: Size(300),
         // minimumSize: Size(350, 30) ,
