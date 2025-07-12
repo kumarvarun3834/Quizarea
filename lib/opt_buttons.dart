@@ -10,7 +10,9 @@ class buttons_opt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton.icon(
+    return Container(
+        width: 350,
+        child: OutlinedButton.icon(
       // onPressed: () {
       //   if (opt == A){
       //     print(Q);
@@ -24,8 +26,8 @@ class buttons_opt extends StatelessWidget {
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
         // fixedSize: Size(300),
-        minimumSize: Size(350, 30) ,
-        maximumSize: Size(350, 200),
+        // minimumSize: Size(350, 30) ,
+        // maximumSize: Size(350, 200),
         backgroundColor: Colors.white10,
         foregroundColor: Colors.black,
         shape: RoundedRectangleBorder(
@@ -33,6 +35,7 @@ class buttons_opt extends StatelessWidget {
         ),
     ),
     label: TextContainer(opt, Colors.black, 20)
+    )
     );
   }
 }

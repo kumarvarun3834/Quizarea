@@ -32,7 +32,18 @@ class _Quiz extends State<MyHomePage> {
     super.initState();
     currState = Main_Screen(onPressed: switchState);
   }
-  final List<List<String>> quizData = [
+
+  List<List<String>> quizReset(){
+    List<List<String>> quizResult=[];
+    int x=0;
+    while(x<quizData.length){
+      //             [Q, trials, false,  selected]
+      quizResult.add([ "" , "" , "false" , "" ]);
+    }
+    return quizResult;
+  }
+
+  List<List<String>> quizData = [
     [
       'What are the main building blocks of Flutter UIs?',
       'Widgets',
@@ -84,14 +95,17 @@ class _Quiz extends State<MyHomePage> {
   ];
 
   int i=0;
-
   void switchState() {
     setState(() {
+      if (i==0){
+        List<List<String>> quizResult = quizReset();
+      }
       if (i < quizData.length) {
-        currState = Quesations(quizData[i], switchState, switchState);
+        currState = Quesations(quizData[i], switchState, quizResult);
+        if (quizData[i][1]==quizResult[i][])
         i += 1;
       }else{
-
+        // currState =
       }
     });
   }
