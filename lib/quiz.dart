@@ -144,8 +144,8 @@ class _Quiz extends State<MyHomePage> {
     List<List<String>> quizResult=[];
     int x=0;
     while(x<quizData.length){
-      //             [Q, trials, false,  selected]
-      quizResult.add([ "" , "" , "false" , "" ]);
+      //             [Q, ans, false,  selected,trials]
+      quizResult.add([ "" , "" , "false" , "" ,""]);
       x++;
     }
     print("quiz reset");
@@ -158,21 +158,21 @@ class _Quiz extends State<MyHomePage> {
   void switchState() {
     setState(() {
       if (i < quizData.length) {
-        print("passed if 1");
-
         if (quizResult[i][0] == quizData[i][0]) {
-          print("passed if 2");
-
-          if (quizData[i][1] == quizResult[i][3]) {
-            print("passed if 3");
-
+          if (quizResult[i][1] == quizResult[i][3]) {
             quizResult[i][2] = "true";
             i += 1;
             print("correct choice");
+
+            quizResult[i][0] = quizData[i][0];
+            quizResult[i][1] = quizData[i][1];
+            quizResult[i][3] = " ";
+
             currState = Quesations(quizData[i], switchState, quizResult[i]);
+
           } else {
             print("working here");
-            quizResult[i][1] += "1";
+            quizResult[i][4] += "1";
             quizData[i].remove(quizResult[i][3]);
             currState = Quesations(quizData[i], switchState, quizResult[i]);
           }

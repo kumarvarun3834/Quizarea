@@ -14,23 +14,23 @@ class buttons_opt extends StatelessWidget {
     return Container(
         width: 350,
         child: OutlinedButton.icon(
-      onPressed: (){
-        $quizResult[3] = opt;
-        print($quizResult);
-        onPressed;
-        },
-      style: OutlinedButton.styleFrom(
-        // fixedSize: Size(300),
-        // minimumSize: Size(350, 30) ,
-        // maximumSize: Size(350, 200),
-        backgroundColor: Colors.white10,
-        foregroundColor: Colors.black,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
-    ),
-    label: TextContainer(opt, Colors.black, 20)
-    )
+            onPressed: (){
+              $quizResult[3] = opt;
+              print($quizResult);
+              onPressed();
+            },
+            style: OutlinedButton.styleFrom(
+              // fixedSize: Size(300),
+              // minimumSize: Size(350, 30) ,
+              // maximumSize: Size(350, 200),
+              backgroundColor: Colors.white10,
+              foregroundColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+            ),
+            label: TextContainer(opt, Colors.black, 20)
+        )
     );
   }
 }
