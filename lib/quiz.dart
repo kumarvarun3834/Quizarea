@@ -28,7 +28,7 @@ class _Quiz extends State<MyHomePage> {
   late Widget currState; //late keyword is used to tell dart i will initialize it later
 
   List<List<String>> quizResult = [];
-  List<Map<String,Object>> quizData = {};
+  List<Map<String,Object>> quizData = [];
 
   @override
   void initState() {
@@ -36,18 +36,19 @@ class _Quiz extends State<MyHomePage> {
     super.initState();
 
     quizData = quizdatareset();
-    quizResult = quizReset();
-    shuffleQuizData(quizData);
+    quizData=shuffleQuizData(quizData);
+    quizResult = quizReset(quizData);
+
     // quizData.shuffle();
     currState = Main_Screen(onPressed: switchState);
   }
 
-  void shuffleQuizData(List<Map<String, Object>> quizData) {
-    quizData.shuffle();
+  List<Map<String, Object>> shuffleQuizData(List<Map<String, Object>> quizData) {
     for (var item in quizData) {
       (item["options"] as List<String>).shuffle();
     }
-  }
+    quizData.shuffle();
+    return quizData;
   }
 
   List<Map<String,Object>> quizdatareset(){
@@ -115,10 +116,10 @@ class _Quiz extends State<MyHomePage> {
   ];
   }
 
-    List<List<String>> quizReset() {
-      List<List<String>> quizResult = [];
-      int x = 0;
-      while (x <= quizData.length) {
+  List<List<String>> quizReset( List<Map<String,Object>> quizData) {
+    List<List<String>> quizResult = [];
+    int x = 0;
+    while (x <= quizData.length) {
         //             [Q, ans, false,  selected,trials]
         quizResult.add([ "", "", "false", "", ""]);
         x++;
@@ -126,18 +127,18 @@ class _Quiz extends State<MyHomePage> {
       print("quiz reset");
       return quizResult;
     }
-  }
+
     int i=0;
     void switchState() {
       setState(() {
         if (i < quizData.length) {
-          if (quizResult[i][0] == quizData[i][0]) {
+          if (quizResult[i] == quizData[i]["question"] as String) {
             if (quizResult[i][1] == quizResult[i][3]) {
               quizResult[i][2] = "true";
               i += 1;
-              quizResult[i][0] = quizData[i][0];
-              quizResult[i][1] = quizData[i][1];
-              quizResult[i][3] = " ";
+              quizResult[i][0] = quizData[i]["question"] as String;
+              quizResult[i][1] = quizData[i]["answer"] as String;
+              // quizResult[i][3] = " ";
 
               currState = Quesations(quizData[i], switchState, quizResult[i]);
 
@@ -148,8 +149,8 @@ class _Quiz extends State<MyHomePage> {
             }
           }else {
             currState = Quesations(quizData[i], switchState, quizResult[i]);
-            quizResult[i][0] = quizData[i][0];
-            quizResult[i][1] = quizData[i][1];
+            quizResult[i][0] = quizData[i]["question"] as String;
+            quizResult[i][1] = quizData[i]["answer"] as String;
             quizResult[i][3] = " ";
           }
         }else if(i == quizData.length ){
@@ -158,7 +159,9 @@ class _Quiz extends State<MyHomePage> {
         }else{
           i=0;
           quizData = quizdatareset();
-          quizResult = quizReset();
+          quizData=shuffleQuizData(quizData);
+          quizResult = quizReset(quizData);
+
           currState = Main_Screen(onPressed: switchState);
         }
       });
@@ -183,4 +186,4 @@ class _Quiz extends State<MyHomePage> {
       );
     }
   }
-}
+

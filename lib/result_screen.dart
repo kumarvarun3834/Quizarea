@@ -14,6 +14,6 @@ class ResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return ;
+    return TextContainer("text", Colors.white, 30);
   }
 }
