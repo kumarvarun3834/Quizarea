@@ -4,8 +4,8 @@ import 'package:quizarea/TextContainer.dart';
 
 class buttons_opt extends StatelessWidget {
   final VoidCallback onPressed;
-  buttons_opt(this.Q,this.opt,this.A,this.onPressed,this.quizResult,{super.key});
-  final String Q,A;
+  buttons_opt(this.opt,this.onPressed,this.quizResult,{super.key});
+  // final String Q,A;
   final String opt;
   Map<String,Object> quizResult;
 
@@ -16,7 +16,7 @@ class buttons_opt extends StatelessWidget {
         child: OutlinedButton.icon(
             onPressed: (){
               !(quizResult["selection"] as List<String>).contains(opt)
-              ?(quizResult["selection"] as List<String>).add(opt):();
+              ?(quizResult["selection"] as List<String>).add(opt):print("$opt already exist");
               print(quizResult);
               onPressed();
             },
