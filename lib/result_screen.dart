@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quizarea/TextContainer.dart';
 
 class ResultScreen extends StatelessWidget {
-  final List<List<String>> quizResult;
+  final List<Map<String,Object>> quizResult;
   // final int originalOptionsPerQuestion;
 
   const ResultScreen(this.quizResult, {super.key});

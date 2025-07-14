@@ -7,7 +7,7 @@ class buttons_opt extends StatelessWidget {
   buttons_opt(this.Q,this.opt,this.A,this.onPressed,this.quizResult,{super.key});
   final String Q,A;
   final String opt;
-  List<String> quizResult;
+  Map<String,Object> quizResult;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,8 @@ class buttons_opt extends StatelessWidget {
         width: 350,
         child: OutlinedButton.icon(
             onPressed: (){
-              quizResult[3] = opt;
+              !(quizResult["selection"] as List<String>).contains(opt)
+              ?(quizResult["selection"] as List<String>).add(opt):();
               print(quizResult);
               onPressed();
             },

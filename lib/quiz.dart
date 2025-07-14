@@ -27,7 +27,7 @@ class MyHomePage extends StatefulWidget {
 class _Quiz extends State<MyHomePage> {
   late Widget currState; //late keyword is used to tell dart i will initialize it later
 
-  List<List<String>> quizResult = [];
+  List<Map<String,Object>> quizResult = [];
   List<Map<String,Object>> quizData = [];
 
   @override
@@ -116,12 +116,17 @@ class _Quiz extends State<MyHomePage> {
   ];
   }
 
-  List<List<String>> quizReset( List<Map<String,Object>> quizData) {
-    List<List<String>> quizResult = [];
+  List<Map<String,Object>> quizReset(List<Map<String,Object>> quizData) {
+    List<Map<String,Object>> quizResult = [];
     int x = 0;
     while (x <= quizData.length) {
         //             [Q, ans, false,  selected,trials]
-        quizResult.add([ "", "", "false", "", ""]);
+        quizResult.add({
+          "question": "",
+          "answer": "",
+          "trials": 0,
+          "selection":[]
+        });
         x++;
       }
       print("quiz reset");
@@ -132,26 +137,29 @@ class _Quiz extends State<MyHomePage> {
     void switchState() {
       setState(() {
         if (i < quizData.length) {
-          if (quizResult[i] == quizData[i]["question"] as String) {
-            if (quizResult[i][1] == quizResult[i][3]) {
-              quizResult[i][2] = "true";
+
+          if (quizResult[i]["question"] == quizData[i]["question"] as String) {
+            print("working here");
+            if (quizResult[i]["question"] == (quizResult[i]["answer"] as List<String>)[-1]) {
               i += 1;
-              quizResult[i][0] = quizData[i]["question"] as String;
-              quizResult[i][1] = quizData[i]["answer"] as String;
+              quizResult[i]["question"] = quizData[i]["question"] as String;
+              quizResult[i]["answer"] = quizData[i]["answer"] as String;
               // quizResult[i][3] = " ";
+              quizResult[i]["trials"] = (quizResult[i]["trials"] as int) +1;
 
               currState = Quesations(quizData[i], switchState, quizResult[i]);
 
             } else {
-              quizResult[i][4] += "1";
-              quizData[i].remove(quizResult[i][3]);
+
+              quizResult[i]["trials"] = (quizResult[i]["trials"] as int) +1;
+              (quizData[i]["options"] as List<String>).remove((quizResult[i]["selection"] as List<String>)[-1]);
               currState = Quesations(quizData[i], switchState, quizResult[i]);
             }
           }else {
             currState = Quesations(quizData[i], switchState, quizResult[i]);
-            quizResult[i][0] = quizData[i]["question"] as String;
-            quizResult[i][1] = quizData[i]["answer"] as String;
-            quizResult[i][3] = " ";
+            quizResult[i]["question"] = quizData[i]["question"] as String;
+            quizResult[i]["answer"] = quizData[i]["answer"] as String;
+            // quizResult[i][3] = " ";
           }
         }else if(i == quizData.length ){
           currState = ResultScreen(quizResult);

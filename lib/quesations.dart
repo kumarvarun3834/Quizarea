@@ -7,8 +7,18 @@ class  Quesations extends StatelessWidget {
   // final VoidCallback onPressed2;
   Quesations(this.dataset,this.onPressed,this.quizResult,{super.key});
   final Map<String,Object> dataset;
-  List<String> quizResult;
+  Map<String,Object> quizResult;
 
+  List<Widget> buttons_Data(Map<String,Object> dataset){
+    List<Widget> database=[];
+    int i=0;
+    while (i<=dataset.length){
+      database.add(buttons_opt(dataset["question"] as String,(dataset["options"] as List<String>)[i],dataset["answer"] as String,onPressed,quizResult));
+      // database.add(dataset["options"][i] as String);
+      i++;
+  }
+  return database;
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,13 +34,7 @@ class  Quesations extends StatelessWidget {
           const SizedBox(height: 20),
           Container(margin: EdgeInsets.all(20),
             width: double.infinity,
-            child: Column(children: [
-              // ...dataset.map()
-              if (dataset.length>=3)  buttons_opt(dataset["question"] as String,dataset["options"] as String,dataset["answer"] as String,onPressed,quizResult),
-              if (dataset.length>=4)  buttons_opt(dataset["question"] as String,dataset["options"] as String,dataset["answer"] as String,onPressed,quizResult),
-              if (dataset.length>=5)  buttons_opt(dataset["question"] as String,dataset["options"] as String,dataset["answer"] as String,onPressed,quizResult),
-              if (dataset.length>=6)  buttons_opt(dataset["question"] as String,dataset["options"] as String,dataset["answer"] as String,onPressed,quizResult),
-            ])
+            child: Column(children: buttons_Data(dataset))
           )
         ]
     );
