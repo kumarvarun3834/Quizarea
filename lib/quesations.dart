@@ -5,77 +5,151 @@ import 'package:quizarea/opt_buttons.dart';
 class Quesations extends StatefulWidget {
   final List<Map<String, Object>> dataSet;
   final List<Map<String, Object>> quizResult;
-  // To go to the next question
-  Quesations(this.dataSet, this.quizResult, this.currState,{super.key});
-  String currState;
+  final void Function(String) onStateChange;
+
+  Quesations(this.dataSet, this.quizResult,{
+    required this.onStateChange,
+    super.key,
+  });
 
   @override
   State<Quesations> createState() => _Quesations();
 }
 
 class _Quesations extends State<Quesations> {
-  @override
-  Widget build(BuildContext context) {
-  List<Map<String, Object>> dataSet = [];
-  List<Map<String, Object>> quizResult = [];
-  String current_state = "";
+  late List<Map<String, Object>> dataSet;
+  late List<Map<String, Object>> quizResult;
+
+  int i = 0;
+
   @override
   void initState() {
     super.initState();
     dataSet = widget.dataSet;
     quizResult = widget.quizResult;
-    current_state=widget.currState;
+    // current_state = widget.currState;
   }
 
-  int i = 0;
+  void switchToResultScreen() {
+    widget.onStateChange("result_screen");
+  }
 
   void switchState() {
     setState(() {
-      if (i < dataSet.length) {
-        _data_selection(dataSet[i]);
+      if (i < dataSet.length - 1) {
         i++;
-      }else{
-        current_state="result_screen";
+      } else {
+        switchToResultScreen();
       }
     });
   }
 
   List<Widget> buttons_Data(Map<String, Object> dataset) {
     List<Widget> database = [];
-    int i = 0;
-    while (i <= dataset.length) {
-      database.add(buttons_opt(
-          (dataset["options"] as List<String>)[i], switchState ,(dataset["answer"] as List<Map<String, Object>>)[i],
-          ));
-      // database.add(dataset["options"][i] as String);
-      i++;
+    List<String> options = dataset["options"] as List<String>;
+    // String answer = dataset["answer"] as String;
+
+    for (var option in options) {
+      database.add(
+        buttons_opt(option, switchState , quizResult[i]),
+      );
     }
     return database;
   }
 
-  _data_selection(Map<String, Object> dataSet) {
-    Widget build(BuildContext context) {
-      return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Center(child: Container(
-                margin: EdgeInsets.all(40),
-                width: double.infinity,
-                child: TextContainer(dataSet["question"] as String,
-                    Color.fromARGB(255, 0, 255, 255), 30)
-            )
+  @override
+  Widget build(BuildContext context) {
+
+    Map<String, Object> currentData = dataSet[i];
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Center(
+          child: Container(
+            margin: const EdgeInsets.all(40),
+            width: double.infinity,
+            child: TextContainer(
+              currentData["question"] as String,
+              const Color.fromARGB(255, 0, 255, 255),
+              30,
             ),
-            const SizedBox(height: 20),
-            Container(margin: EdgeInsets.all(20),
-                width: double.infinity,
-                child: Column(children: buttons_Data(dataSet))
-            )
-          ]
-      );
-    }
+          ),
+        ),
+        const SizedBox(height: 20),
+        Container(
+          margin: const EdgeInsets.all(20),
+          width: double.infinity,
+          child: Column(children: buttons_Data(currentData)),
+        ),
+      ],
+    );
   }
-  }
+}
+
+// class _Quesations extends State<Quesations> {
+//   @override
+//   List<Map<String, Object>> dataSet = [];
+//   List<Map<String, Object>> quizResult = [];
+//   String current_state = "";
+//   @override
+//   void initState() {
+//     super.initState();
+//     dataSet = widget.dataSet;
+//     quizResult = widget.quizResult;
+//     current_state=widget.currState;
+//   }
+//
+//   int i = 0;
+//
+//   void switchState() {
+//     setState(() {
+//       if (i < dataSet.length) {
+//         _data_selection(dataSet[i]);
+//         i++;
+//       }else{
+//         current_state="result_screen";
+//       }
+//     });
+//   }
+//
+//   List<Widget> buttons_Data(Map<String, Object> dataset) {
+//     List<Widget> database = [];
+//     int i = 0;
+//     while (i <= dataset.length) {
+//       database.add(buttons_opt(
+//           (dataset["options"] as List<String>)[i], switchState ,(dataset["answer"] as List<Map<String, Object>>)[i],
+//           ));
+//       // database.add(dataset["options"][i] as String);
+//       i++;
+//     }
+//     return database;
+//   }
+//
+//   _data_selection(Map<String, Object> dataSet) {
+//     Widget build(BuildContext context) {
+//       return Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           crossAxisAlignment: CrossAxisAlignment.stretch,
+//           children: [
+//             Center(child: Container(
+//                 margin: EdgeInsets.all(40),
+//                 width: double.infinity,
+//                 child: TextContainer(dataSet["question"] as String,
+//                     Color.fromARGB(255, 0, 255, 255), 30)
+//             )
+//             ),
+//             const SizedBox(height: 20),
+//             Container(margin: EdgeInsets.all(20),
+//                 width: double.infinity,
+//                 child: Column(children: buttons_Data(dataSet))
+//             )
+//           ]
+//       );
+//     }
+//   }
+//   }
 
 
 

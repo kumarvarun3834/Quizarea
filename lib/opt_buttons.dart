@@ -14,9 +14,15 @@ class buttons_opt extends StatelessWidget {
     return Container(
         width: 350,
         child: OutlinedButton.icon(
-            onPressed: (){
-              !(quizResult["selection"] as List<String>).contains(opt)
-              ?(quizResult["selection"] as List<String>).add(opt):print("$opt already exist");
+            onPressed: () {
+              List<String> selectionList = (quizResult["selection"] as List).cast<String>();
+
+              if (!selectionList.contains(opt)) {
+                selectionList.add(opt);
+              } else {
+                print("$opt already exists");
+              }
+
               print(quizResult);
               onPressed();
             },

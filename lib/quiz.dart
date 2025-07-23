@@ -43,8 +43,7 @@ class _Quiz extends State<MyHomePage> {
     currState = "Main_Screen";
   }
 
-  List<Map<String, Object>> shuffleQuizData(
-      List<Map<String, Object>> quizData) {
+  List<Map<String, Object>> shuffleQuizData(List<Map<String, Object>> quizData) {
     for (var item in quizData) {
       (item["options"] as List<String>).shuffle();
     }
@@ -134,12 +133,19 @@ class _Quiz extends State<MyHomePage> {
     return quizResult;
   }
 
-  // int i=0;
   void switchState() {
     setState(() {
       currState = "Quesation_Screen";
+    });}
+
+  // String currState = "Main_Screen";
+
+  void setCurrState(String newState) {
+    setState(() {
+      currState = newState;
     });
   }
+
 
   @override
   Widget build(context) {
@@ -159,8 +165,8 @@ class _Quiz extends State<MyHomePage> {
           (currState == "Main_Screen")
               ? Main_Screen(onPressed: switchState) :
           (currState == "Quesation_Screen")
-              ? Quesations(quizData, quizResult, currState)
-              : ResultScreen(quizResult)
+              ? Quesations(quizData, quizResult,onStateChange: setCurrState):Main_Screen(onPressed: switchState)
+              // : ResultScreen(quizResult)
 
       ),
     );
