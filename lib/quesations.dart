@@ -14,21 +14,28 @@ class Quesations extends StatefulWidget {
 }
 
 class _Quesations extends State<Quesations> {
+  @override
+  Widget build(BuildContext context) {
   List<Map<String, Object>> dataSet = [];
   List<Map<String, Object>> quizResult = [];
-
+  String current_state = "";
+  @override
   void initState() {
     super.initState();
     dataSet = widget.dataSet;
     quizResult = widget.quizResult;
+    current_state=widget.currState;
   }
 
   int i = 0;
 
   void switchState() {
     setState(() {
-      if (i <= dataSet.length) {
+      if (i < dataSet.length) {
         _data_selection(dataSet[i]);
+        i++;
+      }else{
+        current_state="result_screen";
       }
     });
   }
@@ -38,16 +45,15 @@ class _Quesations extends State<Quesations> {
     int i = 0;
     while (i <= dataset.length) {
       database.add(buttons_opt(
-          (dataset["options"] as List<String>)[i], dataset["answer"] as String,
-          onPressed));
+          (dataset["options"] as List<String>)[i], switchState ,(dataset["answer"] as List<Map<String, Object>>)[i],
+          ));
       // database.add(dataset["options"][i] as String);
       i++;
     }
     return database;
   }
 
-  @override
-  _data_selection(Map<String, Object>dataSet) {
+  _data_selection(Map<String, Object> dataSet) {
     Widget build(BuildContext context) {
       return Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -56,20 +62,21 @@ class _Quesations extends State<Quesations> {
             Center(child: Container(
                 margin: EdgeInsets.all(40),
                 width: double.infinity,
-                child: TextContainer(dataset["question"] as String,
+                child: TextContainer(dataSet["question"] as String,
                     Color.fromARGB(255, 0, 255, 255), 30)
             )
             ),
             const SizedBox(height: 20),
             Container(margin: EdgeInsets.all(20),
                 width: double.infinity,
-                child: Column(children: buttons_Data(dataset))
+                child: Column(children: buttons_Data(dataSet))
             )
           ]
       );
     }
   }
-}
+  }
+
 
 
 // import 'package:flutter/material.dart';
