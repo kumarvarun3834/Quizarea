@@ -8,36 +8,36 @@ class buttons_opt extends StatelessWidget {
   // final String Q,A;
   final String opt;
   Map<String,Object> quizResult;
+  Color colour=Colors.black;
 
   @override
   Widget build(BuildContext context) {
+    (quizResult["selection"] as List<String>).contains(opt)
+        ?colour=Colors.red:colour=Colors.black;
+
     return Container(
         width: 350,
         child: OutlinedButton.icon(
             onPressed: () {
               List<String> selectionList = (quizResult["selection"] as List).cast<String>();
-
               if (!selectionList.contains(opt)) {
                 selectionList.add(opt);
               } else {
                 print("$opt already exists");
               }
-
               print(quizResult);
               onPressed();
             },
             style: OutlinedButton.styleFrom(
-              // fixedSize: Size(300),
-              // minimumSize: Size(350, 30) ,
-              // maximumSize: Size(350, 200),
+
               padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               backgroundColor: Colors.white10,
-              foregroundColor: Colors.black,
+              foregroundColor: colour,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50),
               ),
             ),
-            label: TextContainer(opt, Colors.black, 20)
+            label: TextContainer(opt, colour, 15)
         )
     );
   }

@@ -28,15 +28,21 @@ class _Quesations extends State<Quesations> {
     dataSet = widget.dataSet;
     quizResult = widget.quizResult;
     // current_state = widget.currState;
+    currentData = dataSet[i];
+    quizResult[i]["question"]=dataSet[i]["question"]!;
+    quizResult[i]["answer"]=dataSet[i]["answer"]!;
   }
-
+  Map<String, Object> currentData={};
   void switchToResultScreen() {
     widget.onStateChange("result_screen");
   }
 
   void switchState() {
     setState(() {
-      if (i < dataSet.length - 1) {
+      if (i < dataSet.length - 1 && (quizResult[i]["selection"] as List<String>).contains(quizResult[i]["answer"])) {
+        currentData = dataSet[i];
+        quizResult[i]["question"]=dataSet[i]["question"]!;
+        quizResult[i]["answer"]=dataSet[i]["answer"]!;
         i++;
       } else {
         switchToResultScreen();
@@ -50,8 +56,7 @@ class _Quesations extends State<Quesations> {
     // String answer = dataset["answer"] as String;
     for (var option in options) {
       database.add(
-        buttons_opt(option, switchState , quizResult[i]),
-      );
+        buttons_opt(option, switchState , quizResult[i]));
     }
     return database;
   }
@@ -59,11 +64,10 @@ class _Quesations extends State<Quesations> {
   @override
   Widget build(BuildContext context) {
 
-    Map<String, Object> currentData = dataSet[i];
-    quizResult[i]["question"]=dataSet[i]["question"]!;
-    quizResult[i]["answer"]=dataSet[i]["answer"]!;
 
-    return Column(
+
+    return SingleChildScrollView(
+        child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -85,6 +89,7 @@ class _Quesations extends State<Quesations> {
           child: Column(children: buttons_Data(currentData,)),
         ),
       ],
+    )
     );
   }
 }
