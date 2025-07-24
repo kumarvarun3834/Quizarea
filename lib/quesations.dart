@@ -39,12 +39,15 @@ class _Quesations extends State<Quesations> {
 
   void switchState() {
     setState(() {
-      if (i < dataSet.length - 1 && (quizResult[i]["selection"] as List<String>).contains(quizResult[i]["answer"])) {
+      if (i < dataSet.length - 1 && (quizResult[i]["selection"] as List).cast<String>().contains(quizResult[i]["answer"])) {
         currentData = dataSet[i];
         quizResult[i]["question"]=dataSet[i]["question"]!;
         quizResult[i]["answer"]=dataSet[i]["answer"]!;
         i++;
-      } else {
+        currentData = dataSet[i];
+        quizResult[i]["question"]=dataSet[i]["question"]!;
+        quizResult[i]["answer"]=dataSet[i]["answer"]!;
+      } else if (i == dataSet.length - 1){
         switchToResultScreen();
       }
     });
@@ -66,8 +69,7 @@ class _Quesations extends State<Quesations> {
 
 
 
-    return SingleChildScrollView(
-        child: Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -86,10 +88,10 @@ class _Quesations extends State<Quesations> {
         Container(
           margin: const EdgeInsets.all(20),
           width: double.infinity,
-          child: Column(children: buttons_Data(currentData,)),
+          child: SingleChildScrollView(child:Column(children: buttons_Data(currentData)),
+          )
         ),
       ],
-    )
     );
   }
 }

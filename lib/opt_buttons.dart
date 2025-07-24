@@ -12,7 +12,7 @@ class buttons_opt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    (quizResult["selection"] as List<String>).contains(opt)
+    (quizResult["selection"] as List).cast<String>().contains(opt)
         ?colour=Colors.red:colour=Colors.black;
 
     return Container(
@@ -37,7 +37,7 @@ class buttons_opt extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50),
               ),
             ),
-            label: TextContainer(opt, colour, 15)
+            label: TextContainer(opt, colour, 20)
         )
     );
   }
