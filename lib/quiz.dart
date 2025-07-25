@@ -122,7 +122,7 @@ class _Quiz extends State<MyHomePage> {
     while (x <= quizData.length) {
       //             [Q, ans, false,  selected,trials]
       quizResult.add({
-        "question": "",
+        "question": "a",
         "answer": "",
         "trials": 0,
         "selection": []
@@ -161,13 +161,12 @@ class _Quiz extends State<MyHomePage> {
               end: Alignment.bottomRight,
             ),
           ),
-          child:
-          (currState == "Main_Screen")
-              ? Main_Screen(onPressed: switchState) :
-          (currState == "Quesation_Screen")
-              ? Quesations(quizData, quizResult,onStateChange: setCurrState):Main_Screen(onPressed: switchState)
-              // : ResultScreen(quizResult)
-
+          child:ResultScreen(quizResult)
+          // (currState == "Main_Screen")
+          //     ? Main_Screen(onPressed: switchState) :
+          // (currState == "Quesation_Screen")
+          //     ? Quesations(quizData, quizResult,onStateChange: setCurrState)
+          //     : ResultScreen(quizResult)
       ),
     );
   }
