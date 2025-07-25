@@ -23,17 +23,22 @@ class ResultScreen extends StatelessWidget {
       Map<String, Object> data = quizData[i];
       List<Widget> selections=[];
       int y=0;
-      while(y<((resultDataset["selection"] as List).cast<String>()).length){
-        if(y==(((resultDataset["selection"] as List).cast<String>()).length)-1){
-        selections.add(
-            TextContainer("Selection ${y+1}:",Colors.green,15));}
-        else{
+      while(y<((resultDataset["selection"] as List).cast<String>()).length) {
+        if (y ==
+            (((resultDataset["selection"] as List).cast<String>()).length) -
+                1) {
           selections.add(
-              TextContainer("Selection ${y+1}:",Colors.red,15));}
+              TextContainer("Selection ${y + 1}:", Colors.green, 15));
         }
-        selections.add(TextContainer(((resultDataset["selection"] as List).cast<String>())[y],Colors.white,15));
-            y++;
-
+        else {
+          selections.add(
+              TextContainer("Selection ${y + 1}:", Colors.red, 15));
+        }
+        selections.add(TextContainer(
+            ((resultDataset["selection"] as List).cast<String>())[y],
+            Colors.white, 15));
+        y++;
+      }
 
       result_data.add(Container(
           margin: const EdgeInsets.all(20),
@@ -82,11 +87,22 @@ class ResultScreen extends StatelessWidget {
 
 
     // return TextContainer("text", Colors.white, 30);
-    return SingleChildScrollView(child: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: result_data,
+    return
+      SingleChildScrollView(child:Column(children: [
+
+        Container(
+          // padding: EdgeInsets.all(120),
+          alignment: Alignment.center,
+          height: 300,
+            child: TextContainer("marks shown", Colors.white, 30)
+        ),
+        Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: result_data,
+      )
+    ]
     )
-    );
+      );
   }
 }
