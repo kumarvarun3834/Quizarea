@@ -161,12 +161,12 @@ class _Quiz extends State<MyHomePage> {
               end: Alignment.bottomRight,
             ),
           ),
-          child:ResultScreen(quizResult)
-          // (currState == "Main_Screen")
-          //     ? Main_Screen(onPressed: switchState) :
-          // (currState == "Quesation_Screen")
-          //     ? Quesations(quizData, quizResult,onStateChange: setCurrState)
-          //     : ResultScreen(quizResult)
+          child:
+          (currState == "Main_Screen")
+              ? Main_Screen(onPressed: switchState) :
+          (currState == "Quesation_Screen")
+              ? Quesations(quizData, quizResult,onStateChange: setCurrState)
+              : ResultScreen(quizData,quizResult)
       ),
     );
   }
