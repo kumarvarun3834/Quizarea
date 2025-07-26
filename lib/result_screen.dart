@@ -48,25 +48,29 @@ class ResultScreen extends StatelessWidget {
               children: [
                 Container(
                 width: MediaQuery.of(context).size.width * 0.15, // 20% width
-                color: Colors.blueGrey,
-                  child: Center(child:TextContainer((i+1).toString(), Colors.white, 15))
+                color: Colors.blueGrey[700],
+                  child: Center(child:TextContainer((i+1).toString(), Colors.white70, 20,fontWeight: FontWeight.bold,))
+
               ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.7, // 70% width
-                  color: Colors.blueGrey,
+                  color: Colors.blueGrey[700],
                   padding: EdgeInsets.all(9),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      TextContainer("Quesation: ${resultDataset["question"] as String}", Colors.red, 15),
+                      TextContainer("Quesation: ", Colors.white70, 20,fontWeight: FontWeight.bold,),
+                      TextContainer(resultDataset["question"] as String, Colors.white70, 15),
+
+                      TextContainer("Marks Obtained: ", Colors.white70, 18,fontWeight: FontWeight.bold,),
                       TextContainer(
-                        "Marks Obtained: ${(data["options"] as List).cast<String>().length -
+                        "${(data["options"] as List).cast<String>().length -
                                 (resultDataset["selection"] as List).cast<String>().length}",
                         Colors.white,
                         15,
                       ),
-                      TextContainer("Correct Answer: ${resultDataset["answer"] as String}", Colors.white, 15),
+                      TextContainer("Correct Answer: ${resultDataset["answer"] as String}", Colors.white70, 15),
                       TextContainer("Choices Record: ", Colors.white, 15),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -83,6 +87,7 @@ class ResultScreen extends StatelessWidget {
       );
       i++;
     }
+    result_data.add(SizedBox(height: 150 ,));
     print(result_data);
 
 
@@ -93,8 +98,11 @@ class ResultScreen extends StatelessWidget {
         Container(
           // padding: EdgeInsets.all(120),
           alignment: Alignment.center,
-          height: 300,
-            child: TextContainer("marks shown", Colors.white, 30)
+          height: 400,
+            child: MarksPanel(
+        totalCorrectAnswers: 4,
+        totalQuestions: quizResult.length,
+      ),
         ),
         Column(
         mainAxisAlignment: MainAxisAlignment.start,
