@@ -83,7 +83,7 @@ class MarksPanel extends StatelessWidget {
                   height: 160,
                   child: CircularProgressIndicator(
                     value: percentage, // This will be your calculated percentage (e.g., 0.8 for 80%)
-                    strokeWidth: 12, // Thickness of the progress bar
+                    strokeWidth: 15, // Thickness of the progress bar
                     backgroundColor: Colors.blueGrey[600], // Color of the track
                     valueColor: const AlwaysStoppedAnimation<Color>(Colors.amberAccent), // Color of the progress itself
                   ),

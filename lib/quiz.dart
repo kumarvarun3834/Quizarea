@@ -135,7 +135,14 @@ class _Quiz extends State<MyHomePage> {
 
   void switchState() {
     setState(() {
+      if (currState=="Main_Screen"){
       currState = "Quesation_Screen";
+      }else{
+        quizData = quizdatareset();
+        quizData = shuffleQuizData(quizData);
+        quizResult = quizReset(quizData);
+        currState= "Main_Screen";
+      }
     });}
 
   // String currState = "Main_Screen";
@@ -166,7 +173,7 @@ class _Quiz extends State<MyHomePage> {
               ? Main_Screen(onPressed: switchState) :
           (currState == "Quesation_Screen")
               ? Quesations(quizData, quizResult,onStateChange: setCurrState)
-              : ResultScreen(quizData,quizResult)
+              : ResultScreen(quizData,quizResult,switchState)
       ),
     );
   }

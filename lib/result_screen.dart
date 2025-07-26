@@ -4,10 +4,10 @@ import 'package:quizarea/TextContainer.dart';
 class ResultScreen extends StatelessWidget {
   final List<Map<String,Object>> quizResult;
   final List<Map<String,Object>> quizData;
-
+  final VoidCallback onPressed;
   // final int originalOptionsPerQuestion;
 
-  const ResultScreen(this.quizData,this.quizResult, {super.key});
+  const ResultScreen(this.quizData,this.quizResult, this.onPressed,{super.key});
 
   int getScoreForQuestion(List<String> result) {
     return 0;
@@ -17,12 +17,43 @@ class ResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> result_data = [];
     int i = 0;
+    int total_marks=0;
+    while (i < quizResult.length-1){
+      total_marks+=(quizData[i]["options"] as List).cast<String>().length - (quizResult[i]["selection"] as List).cast<String>().length;
+      i++;
+    }
+    i=0;
+    result_data.add(Container(
+      // padding: EdgeInsets.all(120),
+      alignment: Alignment.center,
+      height: 400,
+      child: MarksPanel(
+        totalCorrectAnswers: total_marks,
+        totalQuestions: (quizResult.length-1)*3,
+      ),
+    ));
+
+    result_data.add(Container(
+      alignment: Alignment.center,
+      child: OutlinedButton.icon(
+        onPressed: onPressed,
+        style: OutlinedButton.styleFrom(
+          foregroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+        icon: Icon(Icons.lock_reset_outlined),
+        label: TextContainer("Restart Quiz", Colors.black, 30),
+      ),
+    ));
 
     while (i < quizResult.length-1) {
       Map<String, Object> resultDataset = quizResult[i];
       Map<String, Object> data = quizData[i];
       List<Widget> selections=[];
       int y=0;
+      print(total_marks);
       while(y<((resultDataset["selection"] as List).cast<String>()).length) {
         if (y ==
             (((resultDataset["selection"] as List).cast<String>()).length) -
@@ -90,27 +121,13 @@ class ResultScreen extends StatelessWidget {
     result_data.add(SizedBox(height: 150 ,));
     print(result_data);
 
-
-    // return TextContainer("text", Colors.white, 30);
     return
-      SingleChildScrollView(child:Column(children: [
-
-        Container(
-          // padding: EdgeInsets.all(120),
-          alignment: Alignment.center,
-          height: 400,
-            child: MarksPanel(
-        totalCorrectAnswers: 4,
-        totalQuestions: quizResult.length,
-      ),
-        ),
+      SingleChildScrollView(child:
         Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: result_data,
       )
-    ]
-    )
-      );
+    );
   }
 }
