@@ -117,7 +117,11 @@ class MarksPanel extends StatelessWidget {
           const SizedBox(height: 20),
           // You can put dynamic feedback here based on your own calculations
           TextContainer(
-            "Keep up the great work!", // Placeholder message
+            (percentage * 100).toInt()>75?"Keep up the great work!":
+            (percentage * 100).toInt()<25?"Better Luck Next Time":
+                "need improvement!"
+
+            , // Placeholder message
             Colors.white70,
             18,
             textAlign: TextAlign.center,
